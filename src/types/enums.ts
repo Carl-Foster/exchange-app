@@ -1,4 +1,4 @@
 export enum Direction {
-  buy = 'buy',
-  sell = 'sell',
+  buy = 'Buy',
+  sell = 'Sell',
 }

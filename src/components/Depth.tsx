@@ -4,7 +4,7 @@ import { OrderType } from '../types/interfaces';
 import { Direction } from '../types/enums';
 import { Order } from './Order';
 
-interface DepthProps {
+export interface DepthProps {
   orders: OrderType[]
   direction: Direction
   style: ViewStyle

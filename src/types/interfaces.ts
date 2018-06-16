@@ -1,5 +1,5 @@
 
 export interface OrderType {
-  amount: number
+  quantity: number
   price: number
 }

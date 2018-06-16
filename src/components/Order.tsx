@@ -15,7 +15,7 @@ export class Order extends React.Component<OrderProps> {
     const directionStyle = styles[this.props.direction]
     return (
       <View style={[styles.order, this.getOpacity()]}>
-        <Text style={[styles.orderText, directionStyle]}>{this.props.amount}@{this.props.price}</Text>
+        <Text style={[styles.orderText, directionStyle]}>{this.props.quantity}@{this.props.price}</Text>
       </View>
     )
   }
@@ -30,10 +30,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  buy: {
+  [Direction.buy]: {
     color: 'hsl(141, 71%, 48%)'
   },
-  sell: {
+  [Direction.sell]: {
     color: 'hsl(348, 100%, 61%)',
   }
 })
