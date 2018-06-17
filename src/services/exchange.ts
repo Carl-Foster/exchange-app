@@ -1,15 +1,11 @@
 import { v4 } from 'uuid'
 import { Direction } from '../types/enums'
-import { OrderType } from '../types/interfaces'
+import { APIOrder, OrderMatch, OrderType } from '../types/interfaces'
 
 import { ajax } from 'rxjs/ajax'
 import { map } from 'rxjs/operators'
 
 const URL = 'http://192.168.0.30:8000/contracts/1'
-
-interface APIOrder extends OrderType {
-  direction: Direction
-}
 
 export function getDepth(direction: Direction) {
   const directionalCompare = (a: OrderType, b: OrderType) =>
@@ -21,15 +17,16 @@ export function getDepth(direction: Direction) {
   )
 }
 
-export async function placeOrder(order: APIOrder) {
-  const response = await fetch(`${URL}/orders`, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+export function placeOrder(order: APIOrder) {
+  return ajax({
+    url: `${URL}/orders`,
+    method: 'post',
+    body: {
+      ...order, account_id: v4(),
     },
-    body: JSON.stringify({ ...order, account_id: v4() }),
-  })
-  const matches = await response.json()
-  return matches
+    headers: { 'Content-Type': 'application/json' },
+    responseType: 'json',
+  }).pipe(
+    map((response): OrderMatch[] => response.response),
+  )
 }

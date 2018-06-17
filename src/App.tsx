@@ -1,39 +1,25 @@
 import * as React from 'react'
-import { Dashboard } from './layouts/Dashboard'
-import { Trade } from './layouts/Trade'
 
+import { ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux'
+import { Redirect, Route, Switch } from 'react-router'
+import { ConnectedDashboard, ConnectedTrade } from './routes'
 import { configureStore } from './store'
+import { ViewPath } from './types/enums'
 
-const store = configureStore()
+const { store, history } = configureStore()
 
-enum View {
-  dashboard,
-  trade,
-}
-interface State {
-  currentView: View
-}
-export class App extends React.Component<{}, State> {
-  public state = {
-    currentView: View.dashboard,
-  }
-
-  public changeView = () => {
-    const newView = this.state.currentView === View.dashboard ? View.trade : View.dashboard
-    this.setState({ currentView: newView })
-  }
-
-  public currentView = () => {
-    return this.state.currentView === View.dashboard
-      ? <Dashboard changeView={this.changeView} />
-      : <Trade changeView={this.changeView} />
-  }
-
+export class App extends React.Component {
   public render() {
     return (
       <Provider store={store as any}>
-        {this.currentView()}
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route path={ViewPath.dashboard} component={ConnectedDashboard} />
+            <Route path={ViewPath.trade} component={ConnectedTrade} />
+            <Redirect to='/dashboard' />
+          </Switch>
+        </ConnectedRouter>
       </Provider>
     )
 

@@ -1,3 +1,5 @@
+import { connectRouter, routerMiddleware } from 'connected-react-router'
+import { createMemoryHistory } from 'history'
 import { applyMiddleware, createStore, Reducer } from 'redux'
 import { Epic } from 'redux-observable'
 import { RootAction } from './root-action'
@@ -8,7 +10,15 @@ export type MyReducer<S> = Reducer<S, RootAction>
 export type MyEpic = Epic<RootAction, RootAction, RootState, Services>
 
 export function configureStore() {
-    const store = createStore(rootReducer, applyMiddleware(epicMiddleware))
+    const history = createMemoryHistory()
+    const routerReducer = connectRouter(history)(rootReducer as any)
+    const store = createStore(
+        routerReducer,
+        applyMiddleware(
+            routerMiddleware(history),
+            epicMiddleware,
+        ),
+    )
     epicMiddleware.run(rootEpic)
-    return store
+    return { store, history }
 }

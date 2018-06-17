@@ -1,13 +1,11 @@
 import React from 'react'
-import { Alert, Button, StatusBar, StyleSheet, View } from 'react-native'
+import { Button, StatusBar, StyleSheet, View, ViewPagerAndroid } from 'react-native'
+import { WithRouterProps } from '.'
 import { Depth } from '../containers/Depth'
-import { Direction } from '../types/enums'
+import { Direction, ViewPath } from '../types/enums'
 
-interface Props {
-  changeView: () => any
-}
-export class Dashboard extends React.Component<Props> {
-  public onTradePress = () => this.props.changeView()
+export class Dashboard extends React.Component<WithRouterProps> {
+  public onTradePress = () => this.props.goToView(ViewPath.trade)
   public render() {
     return (
       <View style={styles.dashboardContainer}>
