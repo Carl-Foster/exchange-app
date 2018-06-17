@@ -1,22 +1,33 @@
 import React from 'react'
-import { View, StyleSheet, ViewStyle } from 'react-native';
-import { OrderType } from '../types/interfaces';
-import { Direction } from '../types/enums';
-import { Order } from './Order';
+import { StyleSheet, View } from 'react-native'
+import { DepthProps } from '../containers/Depth'
+import { Direction } from '../types/enums'
+import { Order } from './Order'
 
-export interface DepthProps {
-  orders: OrderType[]
-  direction: Direction
-  style: ViewStyle
-}
 export class Depth extends React.Component<DepthProps> {
-  render() {
+  public componentDidMount() {
+    this.props.getDepth(this.props.direction)
+  }
+
+  public render() {
     return (
       <View style={[this.props.style, styles.depthContainer, styles[this.props.direction]]}>
-        {this.props.orders.map((order, i) => (<Order {...order} direction={this.props.direction} key={order.price} index={i} />))}
+        {this.renderOrders()}
       </View>
     )
   }
+
+  private renderOrders = () => {
+    return this.props.orders.map((order, i) => (
+      <Order
+        {...order}
+        direction={this.props.direction}
+        key={order.price}
+        index={i}
+      />
+    ))
+  }
+
 }
 
 const styles = StyleSheet.create({
@@ -28,5 +39,5 @@ const styles = StyleSheet.create({
   },
   [Direction.sell]: {
     flexDirection: 'column-reverse',
-  }
+  },
 })

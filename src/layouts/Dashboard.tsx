@@ -1,21 +1,21 @@
 import React from 'react'
-import { View, StyleSheet, StatusBar, Alert, Button } from 'react-native';
-import { Direction } from '../types/enums';
-import { DepthContainer } from '../containers/Depth';
+import { Alert, Button, StatusBar, StyleSheet, View } from 'react-native'
+import { Depth } from '../containers/Depth'
+import { Direction } from '../types/enums'
 
 interface Props {
   changeView: () => any
 }
 export class Dashboard extends React.Component<Props> {
-  onTradePress = () => this.props.changeView()
-  render() {
+  public onTradePress = () => this.props.changeView()
+  public render() {
     return (
       <View style={styles.dashboardContainer}>
-        <DepthContainer direction={Direction.sell} style={styles.depth} />
+        <Depth direction={Direction.sell} style={styles.depth} />
         <View style={styles.tradeButtons}>
-          <Button title="Place Trade" onPress={this.onTradePress} />
+          <Button title='Place Trade' onPress={this.onTradePress} />
         </View>
-        <DepthContainer direction={Direction.buy} style={styles.depth} />
+        <Depth direction={Direction.buy} style={styles.depth} />
       </View>
     )
   }
@@ -34,5 +34,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 5,
-  }
+  },
 })
