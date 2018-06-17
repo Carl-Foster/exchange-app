@@ -26,11 +26,12 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
   },
   depth: {
-    flex: 4,
+    flex: 5,
   },
   tradeButtons: {
     flex: 1,
     justifyContent: 'center',
-    padding: 5,
+    padding: 10,
+    margin: 5,
   },
 })

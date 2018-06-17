@@ -1,8 +1,7 @@
 import React from 'react'
-import { Direction } from '../types/enums';
-import { OrderType } from '../types/interfaces';
-import { View, Text, StyleSheet } from 'react-native';
-
+import { StyleSheet, Text, View } from 'react-native'
+import { Direction } from '../types/enums'
+import { OrderType } from '../types/interfaces'
 
 interface OrderProps extends OrderType {
   direction: Direction
@@ -10,8 +9,8 @@ interface OrderProps extends OrderType {
 }
 
 export class Order extends React.Component<OrderProps> {
-  getOpacity = () => ({ opacity: 1 - (this.props.index * 0.4) })
-  render() {
+  public getOpacity = () => ({ opacity: 1 - (this.props.index * 0.4) })
+  public render() {
     const directionStyle = styles[this.props.direction]
     return (
       <View style={[styles.order, this.getOpacity()]}>
@@ -31,9 +30,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   [Direction.buy]: {
-    color: 'hsl(141, 71%, 48%)'
+    color: 'hsl(141, 71%, 48%)',
   },
   [Direction.sell]: {
     color: 'hsl(348, 100%, 61%)',
-  }
+  },
 })

@@ -13,7 +13,7 @@ export function getDepth(direction: Direction) {
       ? b.price > a.price
       : a.price > b.price
   return ajax.getJSON<OrderType[]>(`${URL}/depth/${direction}`).pipe(
-    map((orders) => orders.sort((a, b) => directionalCompare(a, b) ? 1 : -1)),
+    map((orders) => orders.sort((a, b) => directionalCompare(a, b) ? 1 : -1).slice(0, 3)),
   )
 }
 
