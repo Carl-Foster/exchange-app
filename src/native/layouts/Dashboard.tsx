@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button, StatusBar, StyleSheet, View, ViewPagerAndroid } from 'react-native'
-import { WithRouterProps } from '.'
-import { Depth } from '../containers/Depth'
-import { Direction, ViewPath } from '../types/enums'
+import { Button, StatusBar, StyleSheet, View } from 'react-native'
+import { Depth } from '../../containers/Depth'
+import { WithRouterProps } from '../../routes'
+import { Direction, ViewPath } from '../../types/enums'
 
 export class Dashboard extends React.Component<WithRouterProps> {
   public onTradePress = () => this.props.goToView(ViewPath.trade)
@@ -35,3 +35,5 @@ const styles = StyleSheet.create({
     margin: 5,
   },
 })
+
+export default Dashboard

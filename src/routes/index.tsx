@@ -1,7 +1,7 @@
 import { goBack, push, replace } from 'connected-react-router'
-import { Component, connect } from 'react-redux'
-import { Dashboard } from './Dashboard'
-import { Trade } from './Trade'
+import { ComponentType } from 'react'
+import Loadable from 'react-loadable'
+import { connect } from 'react-redux'
 
 const mapDispatchToProps = {
   goToView: push,
@@ -9,8 +9,12 @@ const mapDispatchToProps = {
 }
 
 export type WithRouterProps = typeof mapDispatchToProps
+const withRouter = (component: ComponentType<WithRouterProps>) => connect(null, mapDispatchToProps)(component)
 
-const withRouter = (component: Component<WithRouterProps>) => connect(null, mapDispatchToProps)(component)
-
-export const ConnectedDashboard = withRouter(Dashboard)
-export const ConnectedTrade = withRouter(Trade)
+const loadable = (path: string) => Loadable({
+  loader: () => import(`../${process.env.WEB ? 'web' : 'native'}/layouts/${path}`),
+  loading: () => null,
+  render: (Loaded, props: WithRouterProps) => <Loaded {...props} />,
+})
+export const ConnectedDashboard = withRouter(loadable('Dashboard'))
+export const ConnectedTrade = withRouter(loadable('Trade'))

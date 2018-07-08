@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button, StyleSheet, TextInput, View } from 'react-native'
-import { TradeProps } from '../containers/TradeForm'
-import { Direction } from '../types/enums'
-import { OrderType } from '../types/interfaces'
+import { TradeProps } from '../../containers/TradeForm'
+import { Direction } from '../../types/enums'
+import { OrderType } from '../../types/interfaces'
 
 export class TradeForm extends React.Component<TradeProps> {
   private quantityRef!: TextInput | null

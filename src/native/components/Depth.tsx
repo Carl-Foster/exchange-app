@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { DepthProps } from '../containers/Depth'
-import { Direction } from '../types/enums'
+import { DepthProps } from '../../containers/Depth'
+import { Direction } from '../../types/enums'
 import { Order } from './Order'
 
 export class Depth extends React.Component<DepthProps> {

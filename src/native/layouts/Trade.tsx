@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native'
-import { WithRouterProps } from '.'
-import { TradeForm } from '../containers/TradeForm'
+import { TradeForm } from '../../containers/TradeForm'
+import { WithRouterProps } from '../../routes'
 
 export class Trade extends React.Component<WithRouterProps> {
   public render() {
@@ -39,3 +39,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 })
+
+export default Trade

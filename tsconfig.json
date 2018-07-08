@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "es2015",
+    "baseUrl": "src",
+    "module": "esNext",
     "outDir": "build/dist",
     "sourceMap": true,
     "experimentalDecorators": true,
